@@ -36,6 +36,7 @@ namespace cmd_project
             {
                 fs.Seek(1024, SeekOrigin.Begin); 
                 fs.Write(b, 0, b.Length);
+            
             }
         }
 
@@ -48,7 +49,6 @@ namespace cmd_project
             fs.Read(c, 0, c.Length);
             Buffer.BlockCopy(c, 0, FAT, 0, c.Length);
             fs.Close();
-
         }
         static public int getavailable_Block()
         {
@@ -89,17 +89,13 @@ namespace cmd_project
             return counter;
         }
         static public int get_free_spaces() {
-            int co = get_available_Blocks()-co2;
-            co2++;
+            int co = get_available_Blocks();
+            
             return co * 1024;
         }
-
-
-
-
-
-
 
     }
 
 }
+
+

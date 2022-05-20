@@ -99,28 +99,16 @@ namespace cmd_project
                         next = Fat_Table.get_Next_Bloack(Fat_index);
                     }
                 } while (next != -1);
-                byte[] b = new byte[32];
+                // byte[] b = new byte[32];
+                string c = string.Empty;
+               
                 for (int i = 0; i < ls.Count; i++)
                 {
-
-                    for (int j = i * 32, c = 0; c < 32; j++, c++)
-                    {
-                        b[c] = ls[j];
-                    }
-                    Directory_Table.Add(getDirector_entry(b));
+                    if(Convert.ToChar((ls[i]))!='\0')
+                    c += (Convert.ToChar((ls[i])));
+                   
                 }
-                for (int i = 0; i < ls.Count; i++)
-                {
-                    b[i % 32] = ls[i];
-                    if ((i + 1) % 32 == 0)
-                    {
-                        Directory_Entry d = this.getDirector_entry(b);
-                        if (d.file_Name[0] != '\0')
-                        {
-                            Directory_Table.Add(d);
-                        }
-                    }
-                }
+                this.content = c;
             }
         }
         //}

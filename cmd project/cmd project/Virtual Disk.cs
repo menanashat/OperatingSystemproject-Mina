@@ -68,16 +68,18 @@ namespace cmd_project
                     }
                 }
                 Fat_Table.prepare_FAT();
-              
 
-                dirctory root = new dirctory("H:".ToCharArray(),0x01,5,0,null);
+
+                dirctory root = new dirctory("H:\\".ToCharArray(), 0x10, 5, 0, null) ;
        
+
                 root.Write_Directory();
+                
                 Fat_Table.Write_FAT();
 
                 Program.current_Directory = root;
 
-
+               
             }
 
         }

@@ -91,24 +91,25 @@ namespace cmd_project
 
             }
 
-            File_Attribute = b2[11];
+           gh. File_Attribute = b2[11];
 
-            for (int i = 12,c=0; i < 24; i++,c++)
+            for (int i = 12; i < 24; i++)
             {
-                gh.File_empty[c] = Convert.ToChar(b2[i]);
+                gh.File_empty[i-12] ='0';
             }
-
+            byte[] b = new byte[4];
             for (int i = 24; i < 28; i++)
             {
-                gh.file_first_Cluster = Convert.ToInt32(b2[i]);
+                b[i-24]=b2[i];
 
             }
+            gh.file_first_Cluster = BitConverter.ToInt32(b);
             for (int i = 28; i < 32; i++)
             {
-                gh.file_Size=Convert.ToByte(file_Size);
+                b[i - 28] = b2[i];
             }
 
-
+            gh.file_Size = BitConverter.ToInt32(b);
             return gh;
         }
         public Directory_Entry getDirector_entry()

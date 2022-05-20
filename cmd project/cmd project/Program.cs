@@ -16,11 +16,10 @@ namespace cmd_project
             D.initialize(@"C:\Users\mm\source\repos\cmd project\cmd project\output.txt");
             string names = String.Concat(Program.current_Directory.file_Name.Where(c => !Char.IsWhiteSpace(c)));
             string a = new string(names);
-            List<string> Date = new List<string>();
-            DateTime aDate = DateTime.Now;
-            string[] fileEntries = Directory.GetFiles(@"E:\cv");
-            List<string> fileImport = new List<string>();
-
+            //List<string> Date = new List<string>();
+            //DateTime aDate = DateTime.Now;
+            //string[] fileEntries = Directory.GetFiles(@"E:\cv");
+            //List<string> fileImport = new List<string>();
 
 
             while (true)
@@ -30,6 +29,7 @@ namespace cmd_project
 
                 Console.Write(a + ">");
 
+          
 
                 string command = Console.ReadLine().ToLower();
 
@@ -38,57 +38,18 @@ namespace cmd_project
 
 
                 /////////
-                void cd_copy(string name_of_md)
-                {
-                    int index = Program.current_Directory.searchDirectory(name_of_md);
-                    if (index != -1)
-                    {
-                        int first = Program.current_Directory.Directory_Table[index].file_first_Cluster;
-                        dirctory d = new dirctory(name_of_md.ToCharArray(), 0x10, first, 0, Program.current_Directory);
-                        Program.current_Directory = d;
-
-                        a = a + String.Concat(d.file_Name.Where(c => !Char.IsWhiteSpace(c)));//بتمسج المسافات
-                        Program.current_Directory.Read_Directory();
-
-                    }
-
-                }
+           
             
 
 
-                void import_copy(string path)
-                {
-                    if (File.Exists(path))
-                    {
-                        string name_txt = Path.GetFileName(path);
-                        string content_txt = File.ReadAllText(path);
-                        int size_txt = content_txt.Length;
-                        int index = Program.current_Directory.searchDirectory(name_txt);
-                        if (index == -1)
-                        {
-                            if (size_txt > 0)
-                            {
-                                Program.current_Directory.file_first_Cluster = Fat_Table.getavailable_Block();
-                            }
-                            else { }
-                            File_Directory d = new File_Directory(name_txt.ToCharArray(), 0x01, 0, size_txt, Program.current_Directory, content_txt);
-                            d.Write_File();
-                            Directory_Entry d1 = new Directory_Entry(name_txt.ToCharArray(), 0x01, 0, size_txt);
-                            Program.current_Directory.Directory_Table.Add(d1);
-                            Program.current_Directory.Write_Directory();
-                        }
-
-                    }
-
-
-                }
-
+                
                 ///////////
 
 
+ 
 
-
-                if (splits.Length == 1)
+                
+               if (splits.Length == 1)
                 {
 
                     if (splits[0] == "help")
@@ -125,11 +86,11 @@ namespace cmd_project
                         int count_num_files = 0;
                         int count_num_Directory = 0;
                         int size_of_each_file = 0;
+                       // Console.WriteLine(Program.current_Directory.Directory_Table[0].File_Attribute);
                         for (int i = 0; i < Program.current_Directory.Directory_Table.Count; i++)
                         {
                             if (Program.current_Directory.Directory_Table[i].File_Attribute == 1)
                             {
-
                                 Console.WriteLine("         " + Program.current_Directory.Directory_Table[i].file_Size + "  " + new string(Program.current_Directory.Directory_Table[i].file_Name));
 
                                 count_num_files++;
@@ -191,7 +152,7 @@ namespace cmd_project
                             int index = Program.current_Directory.searchDirectory(splits[1]);
                             if (index != -1)
                             {
-                                Date.RemoveAt(index);
+                               // Date.RemoveAt(index);
                                 int first = Program.current_Directory.Directory_Table[index].file_first_Cluster;
                                 dirctory d = new dirctory(splits[1].ToCharArray(), 0x10, first, 0, Program.current_Directory);
                                 d.Delete_Directory();
@@ -210,12 +171,12 @@ namespace cmd_project
 
                             int first = Program.current_Directory.Directory_Table[index].file_first_Cluster;
                             int size = Program.current_Directory.Directory_Table[index].file_Size;
-                            string content = "";
-                            File_Directory d1 = new File_Directory(splits[1].ToCharArray(), 0x01, first, size, Program.current_Directory, content);
+                         
                             string content_txt = File.ReadAllText("E:\\cv\\mina.txt");
+                            File_Directory d1 = new File_Directory(splits[1].ToCharArray(), 0x01, first, size, Program.current_Directory, content_txt);
                             d1.Read_File();
                             Console.WriteLine(d1.content);
-                            Console.WriteLine(content_txt);
+                           // Console.WriteLine(content_txt);
                         }
 
                         else
@@ -300,16 +261,19 @@ namespace cmd_project
                             isused = true;
                             if (Program.current_Directory.searchDirectory(splits[1]) == -1)
                             {
+                                //Console.WriteLine(Program.current_Directory.Directory_Table[0].File_Attribute);
                                 Directory_Entry d = new Directory_Entry(splits[1].ToCharArray(), 0x10, 0, 0);
+                                //Console.WriteLine(Program.current_Directory.Directory_Table[0].File_Attribute);
                                 Program.current_Directory.Directory_Table.Add(d);
+                                //Console.WriteLine(Program.current_Directory.Directory_Table[0].File_Attribute);
                                 Program.current_Directory.Write_Directory();
                                 if (Program.current_Directory.parent != null)
                                 {
                                     Program.current_Directory.parent.Update(Program.current_Directory.getDirector_entry());
                                     Program.current_Directory.parent.Write_Directory();
                                 }
-                                DateTime aDate2 = DateTime.Now;
-                                Date.Add(aDate2.ToString("MM / dd / yyyy  HH:mm  tt"));
+                                //DateTime aDate2 = DateTime.Now;
+                             //   Date.Add(aDate2.ToString("MM / dd / yyyy  HH:mm  tt"));
 
                             }
 
@@ -407,25 +371,32 @@ namespace cmd_project
                         int index = Program.current_Directory.searchDirectory(splits[1]);
                         if (index != -1)
                         {
+                            int indexs = Program.current_Directory.searchDirectory(splits[2]);
                             if (System.IO.Directory.Exists(splits[2]))
                             {
                                 if (Program.current_Directory.ToString() != splits[2])
                                 {
-                                    cd_copy(splits[2]);
-                                    import_copy("E:\\cv\\mina.txt");
+                                    //cd_copy(splits[2]);
+                                    //import_copy("E:\\cv\\mina.txt");
                                     
                                     char ask;
+                                    
                                     Console.WriteLine("Do you want to overide (y/n)");
                                     ask = Convert.ToChar(Console.ReadLine());
                                     if (ask == 'y')
-                                    {
-                                   //     int first = Program.current_Directory.Directory_Table[index].file_first_Cluster;
-                                    //    int size = Program.current_Directory.Directory_Table[index].file_Size;
+                                    {//if 
+                                        int first = Program.current_Directory.Directory_Table[index].file_first_Cluster;
+                                        int size = Program.current_Directory.Directory_Table[index].file_Size;
+                                  
 
-                                        Directory_Entry d1 = new Directory_Entry(splits[1].ToCharArray(), 0x01, 0, 0);
-                                        dirctory d = new dirctory();
-                                        //المفروض هنا  اوصل لل و اضيف file جوا directory  directoy المعمول 
-                                        Program.current_Directory.Directory_Table.Add(d);
+                                        Directory_Entry d1 = new Directory_Entry(splits[1].ToCharArray(), 0x01, first, size);
+                                    
+                                        Program.current_Directory.Directory_Table.Add(d1);
+
+                                        Program.current_Directory.Write_Directory();
+                                        
+                                      
+
                                     }
                                 }
                                 else

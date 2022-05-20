@@ -26,10 +26,10 @@ namespace cmd_project
         //big array
 
 
-        public byte[] Direcctory_Entry_Byte = new byte[32];
 
         public void Write_Directory()
         {
+              byte[] Direcctory_Entry_Byte = new byte[32];
             byte[] Directory_table_bytes = new byte[32 * Directory_Table.Count];
 
             for (int i = 0; i < Directory_Table.Count; i++)
@@ -41,9 +41,9 @@ namespace cmd_project
                 }
             }
 
-            double Num_of_Required_Blocks = System.Math.Ceiling(Convert.ToDouble(Directory_table_bytes.Length / 1024));
+            double Num_of_Required_Blocks = System.Math.Ceiling(Directory_table_bytes.Length / 1024.0);
 
-            double NUM_of_Full_size_Blocks = System.Math.Floor(Convert.ToDouble(Directory_table_bytes.Length / 1024));
+            int NUM_of_Full_size_Blocks = Directory_table_bytes.Length / 1024;
 
             int reminder = Directory_table_bytes.Length % 1024;
 
@@ -73,13 +73,16 @@ namespace cmd_project
                     }
 
                     byte[] b2 = new byte[1024];
-                    for (int i = (int)NUM_of_Full_size_Blocks * 1024, c = 0; c < reminder; i++, c++)
+                if (reminder > 0)
+                {
+                    for (int i = NUM_of_Full_size_Blocks * 1024, c = 0; c < reminder; i++, c++)
                     {
-                        b2[i] = Directory_table_bytes[c];
+                        b2[c] = Directory_table_bytes[i];
                     }
                     LS.Add(b2);
+                }
                    
-                    for (int i = 0; i < NUM_of_Full_size_Blocks; i++)
+                    for (int i = 0; i < LS.Count; i++)
                     {
 
                         Virtual_Disk.Write_Cluster(Fat_Index, LS[i]);
@@ -91,16 +94,28 @@ namespace cmd_project
                         last_Index = Fat_Index;
                         Fat_Index = Fat_Table.getavailable_Block();
                     }
+                if (Directory_Table.Count == 0)
+                {
+                    if (file_first_Cluster != 0)
+                    {
+                        Fat_Table.set_Next_Block(file_first_Cluster, 0);
+                        file_first_Cluster = 0;
+                    
+                    
+                    }
+                
+                
+                
+                }
 
                     Fat_Table.Write_FAT();
                 
-
             }
 
         }
         public void Read_Directory()
         {
-            List<Directory_Entry> Directory_Table=new List<Directory_Entry>();
+             Directory_Table=new List<Directory_Entry>();
             if (file_first_Cluster != 0 && Fat_Table.get_Next_Bloack(file_first_Cluster) != 0)
             {
                 List<byte> ls = new List<byte>();
@@ -118,15 +133,7 @@ namespace cmd_project
                     }
                 } while (next != -1);
                 byte[] b = new byte[32];
-                for (int i = 0; i < ls.Count; i++)
-                {
-
-                    for (int j = i * 32, c = 0; c < 32; j++, c++)
-                    {
-                        b[c] = ls[j];
-                    }
-                    Directory_Table.Add(getDirector_entry(b));
-                }
+               
                 for (int i = 0; i < ls.Count; i++)
                 {
                     b[i % 32] = ls[i];
@@ -141,6 +148,7 @@ namespace cmd_project
         }
         public int searchDirectory(string name)
         {
+            Read_Directory();
             if (name.Length < 11)
             {
                 name += "\0";
@@ -153,8 +161,7 @@ namespace cmd_project
             {
                 name = name.Substring(0, 11);
             }
-            if (Directory_Table.Count != null)
-            {
+            
                 for (int i = 0; i < Directory_Table.Count; i++)
                 {
                     string n = new string(Directory_Table[i].file_Name);
@@ -163,14 +170,15 @@ namespace cmd_project
                         return i;
                     }
                 }
-            }
+            
             return -1;
 
         }
         public void Update(Directory_Entry d)
         {
             Read_Directory();
-            int index = searchDirectory(Convert.ToString(d.file_Name));
+            string name = new string(d.file_Name);
+            int index = searchDirectory(Convert.ToString(name));
             if (index != -1)
             {
                 Directory_Table.RemoveAt(index);
