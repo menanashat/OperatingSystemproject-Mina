@@ -15,7 +15,8 @@ namespace cmd_project
         {
             Virtual_Disk D = new Virtual_Disk();
             Virtual_Disk.initialize(@"C:\Users\mm\source\repos\cmd project\cmd project\output.txt");
-            string names = String.Concat(Program.current_Directory.file_Name.Where(c => !Char.IsWhiteSpace(c)));
+            string names = String.Concat(Program.current_Directory.file_Name.Where(c => !Char.
+            IsWhiteSpace(c)));
             string a = new string(names);
          
 
