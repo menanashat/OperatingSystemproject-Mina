@@ -21,9 +21,7 @@ computer.
 
 Link of video is:https://drive.google.com/file/d/1vnWSIR2oA-BFyvjQ9aVpA38BFph_zgLQ/view
 
-
-https://www.istockphoto.com/photo/digital-binary-code-concept-gm1032524474-276551660
-
+![image](https://user-images.githubusercontent.com/68238337/169652502-020847ce-93dc-4d3d-97f9-86d0ba3fdd30.png)
 
 
 This project was implemented by:
