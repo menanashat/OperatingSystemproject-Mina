@@ -73,6 +73,7 @@ namespace cmd_project
                     }
 
                     byte[] b2 = new byte[1024];
+              
                 if (reminder > 0)
                 {
                     for (int i = NUM_of_Full_size_Blocks * 1024, c = 0; c < reminder; i++, c++)
