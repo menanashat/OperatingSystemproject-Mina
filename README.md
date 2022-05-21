@@ -19,9 +19,11 @@ commands.
 computer.
 13. export: export text file(s) to your computer.
 
-Link of video is:[https://drive.google.com/file/d/1_fhSdO5jEKK22b0GNFtF83HcsPpwsBGD/view?usp=sharing](https://drive.google.com/file/d/1vnWSIR2oA-BFyvjQ9aVpA38BFph_zgLQ/view)
+Link of video is:https://drive.google.com/file/d/1vnWSIR2oA-BFyvjQ9aVpA38BFph_zgLQ/view
 
-[[[![image](https://user-images.githubusercontent.com/68238337/167273824-20aa60ac-7d45-4147-868c-981449f27ad3.png)](https://drive.google.com/file/d/1vnWSIR2oA-BFyvjQ9aVpA38BFph_zgLQ/view?usp=sharing)](https://drive.google.com/file/d/1vnWSIR2oA-BFyvjQ9aVpA38BFph_zgLQ/view)](https://www.istockphoto.com/photo/digital-binary-code-concept-gm1032524474-276551660)
+
+https://www.istockphoto.com/photo/digital-binary-code-concept-gm1032524474-276551660
+
 
 
 This project was implemented by:
