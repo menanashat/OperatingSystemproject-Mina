@@ -21,7 +21,7 @@ computer.
 
 Link of video is:https://drive.google.com/file/d/1_fhSdO5jEKK22b0GNFtF83HcsPpwsBGD/view?usp=sharing
 
-![image](https://user-images.githubusercontent.com/68238337/167273824-20aa60ac-7d45-4147-868c-981449f27ad3.png)
+[![image](https://user-images.githubusercontent.com/68238337/167273824-20aa60ac-7d45-4147-868c-981449f27ad3.png)](https://drive.google.com/file/d/1vnWSIR2oA-BFyvjQ9aVpA38BFph_zgLQ/view?usp=sharing)
 
 
 This project was implemented by:
